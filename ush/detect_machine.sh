@@ -12,6 +12,8 @@ case $(hostname -f) in
   v109a[1-4].ncep.noaa.gov)   MACHINE_ID=wcoss_dell_p3 ;; ### venus3.5
   v110a[1-4].ncep.noaa.gov)   MACHINE_ID=wcoss_dell_p3 ;; ### venus3.5
 
+  slurm-noaa-fv3-login0.c.noaa-leap-gfs-sandbox.internal) MACHINE_ID=gcp ;; ### GCP
+
   adecflow0[12].acorn.wcoss2.ncep.noaa.gov)  MACHINE_ID=wcoss2 ;; ### acorn
   alogin0[12].acorn.wcoss2.ncep.noaa.gov)    MACHINE_ID=wcoss2 ;; ### acorn
   clogin0[1-9].cactus.wcoss2.ncep.noaa.gov)  MACHINE_ID=wcoss2 ;; ### cactus01-9
