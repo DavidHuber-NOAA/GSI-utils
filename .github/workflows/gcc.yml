@@ -49,7 +49,7 @@ jobs:
 
       - name: checkout  # This is for getting spack.yaml
         if: steps.cache-env.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
             path: gsi-utils
 
@@ -86,7 +86,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
             path: gsi-utils
 
