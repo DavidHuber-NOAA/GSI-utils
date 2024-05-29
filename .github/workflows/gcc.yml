@@ -48,6 +48,7 @@ jobs:
           df -h
 
       - name: checkout  # This is for getting spack.yaml
+        if: steps.cache-env.outputs.cache-hit != 'true'
         uses: actions/checkout@v3
         with:
             path: gsi-utils
@@ -66,17 +67,20 @@ jobs:
       - name: install-dependencies-with-spack
         if: steps.cache-env.outputs.cache-hit != 'true'
         run: |
+          sudo apt-get install cmake
           git clone -c feature.manyFiles=true https://github.com/JCSDA/spack.git
           source spack/share/spack/setup-env.sh
           spack env create gsiutils-env gsi-utils/ci/spack.yaml
           spack env activate gsiutils-env
+          spack compiler find
+          sudo apt install cmake
           spack external find
           spack add mpich@3.4.2
           spack concretize
           spack install -v --fail-fast --dirty
           spack clean --all
 
-  gsi-monitor:
+  gsi-utils:
     needs: setup
     runs-on: ubuntu-latest
 
@@ -99,10 +103,11 @@ jobs:
         run: |
           source spack/share/spack/setup-env.sh
           spack env activate gsiutils-env
-          export CC=mpicc
-          export FC=mpif90
           cd gsi-utils
           mkdir -p build && cd build
           cmake -DCMAKE_INSTALL_PREFIX=../install -DBUILD_UTIL_ALL=ON ..
           make -j2 VERBOSE=1
           make install
+        env:
+          CC: mpicc
+          FC: mpif90
