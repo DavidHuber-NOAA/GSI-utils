@@ -39,6 +39,7 @@ elif [[ $MACHINE_ID = s4* ]] ; then
 elif [[ $MACHINE_ID = wcoss2 ]]; then
     # We are on WCOSS2
     module reset
+    export LMOD_TMOD_FIND_FIRST=yes
 
 elif [[ $MACHINE_ID = cheyenne* ]] ; then
     # We are on NCAR Cheyenne
